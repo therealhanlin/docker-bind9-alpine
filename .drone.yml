@@ -18,6 +18,44 @@ steps:
 
 ---
 kind: pipeline
+name: arm
+
+platform:
+  os: linux
+  arch: arm
+
+steps:
+- name: docker  
+  image: plugins/docker
+  settings:
+    username:
+      from_secret: docker_username
+    password:
+      from_secret: docker_password
+    repo: mjkaye/docker-bind9-multiarch
+    tags: latest-arm
+
+---
+kind: pipeline
+name: arm64
+
+platform:
+  os: linux
+  arch: arm64
+
+steps:
+- name: docker  
+  image: plugins/docker
+  settings:
+    username:
+      from_secret: docker_username
+    password:
+      from_secret: docker_password
+    repo: mjkaye/docker-bind9-multiarch
+    tags: latest-arm64
+
+---
+kind: pipeline
 name: push_manifest
 
 steps:
