@@ -1,5 +1,8 @@
 kind: pipeline
-name: default
+name: amd64
+
+platform:
+  arch: amd64
 
 steps:
 - name: docker  
@@ -10,7 +13,12 @@ steps:
     password:
       from_secret: docker_password
     repo: mjkaye/docker-bind9-multiarch
-    tags: latest
+    tags: latest-amd64
+
+---
+kind: pipeline
+name: push_manifest
+
 - name: manifest
   image: plugins/manifest
   settings:
