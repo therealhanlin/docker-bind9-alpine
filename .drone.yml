@@ -2,6 +2,7 @@ kind: pipeline
 name: amd64
 
 platform:
+  os: linux
   arch: amd64
 
 steps:
