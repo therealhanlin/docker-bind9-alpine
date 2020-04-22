@@ -1,8 +1,8 @@
 FROM alpine:latest
 
-MAINTAINER resyst-it <florian.cauzardjarry@gmail.com>
+MAINTAINER Michael Kaye <mjkaye@cuttingfree.info>
 
-RUN apk --update add bind
+RUN apk add --no-cache bind
 
 EXPOSE 53
 
