@@ -2,6 +2,15 @@ kind: pipeline
 name: default
 
 steps:
+- name: docker  
+  image: plugins/docker
+  settings:
+    username:
+      from_secret: docker_username
+    password:
+      from_secret: docker_password
+    repo: mjkaye/docker-bind9-multiarch
+    tags: latest
 - name: manifest
   image: plugins/manifest
   settings:
