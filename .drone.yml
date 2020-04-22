@@ -1,0 +1,21 @@
+kind: pipeline
+name: arm
+
+platform:
+  os: linux
+  arch: arm
+
+steps:
+- name: publish
+  pull: always
+  image: plugins/docker
+  settings:
+    auto_tag: true
+    auto_tag_suffix: arm
+    daemon_off: false
+    dockerfile: Dockerfile
+    password:
+      from_secret: docker_password
+    repo: mjkaye/docker-bind9-multiarch
+    username:
+      from_secret: docker_username
