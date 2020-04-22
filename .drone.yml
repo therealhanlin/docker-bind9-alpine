@@ -20,6 +20,7 @@ steps:
 kind: pipeline
 name: push_manifest
 
+steps:
 - name: manifest
   image: plugins/manifest
   settings:
