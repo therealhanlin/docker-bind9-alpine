@@ -13,7 +13,7 @@ steps:
       from_secret: docker_username
     password:
       from_secret: docker_password
-    repo: mjkaye/docker-bind9-multiarch
+    repo: mjkaye/bind9-alpine
     tags: latest-amd64
 
 ---
@@ -32,7 +32,7 @@ steps:
       from_secret: docker_username
     password:
       from_secret: docker_password
-    repo: mjkaye/docker-bind9-multiarch
+    repo: mjkaye/bind9-alpine
     tags: latest-arm
 
 ---
@@ -51,7 +51,7 @@ steps:
       from_secret: docker_username
     password:
       from_secret: docker_password
-    repo: mjkaye/docker-bind9-multiarch
+    repo: mjkaye/bind9-alpine
     tags: latest-arm64
 
 ---
@@ -66,8 +66,8 @@ steps:
       from_secret: docker_username
     password:
       from_secret: docker_password
-    target: mjkaye/docker-bind9-multiarch:latest
-    template: mjkaye/docker-bind9-multiarch:latest-ARCH
+    target: mjkaye/bind9-alpine:latest
+    template: mjkaye/bind9-alpine:latest-ARCH
     platforms:
       - linux/amd64
       - linux/arm

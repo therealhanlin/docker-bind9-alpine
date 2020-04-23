@@ -1,8 +1,10 @@
-## Bind9 for Docker running on Alpine 3.9
+# Bind9 Docker image running on Alpine Linux
 
-### Command to use with this image:
+[![Build Status](https://cloud.drone.io/api/badges/mjkaye/docker-bind9-alpine/status.svg)](https://cloud.drone.io/mjkaye/docker-bind9-alpine)
+
+## Command to use with this image:
 ```
-docker run -d --name bind9 -p 53:53 -p 53:53/udp -v /absolute/path/named.conf:/etc/bind/named.conf -v /absolute/path/exemple.com.db:/etc/bind/exemple.com.db resystit/bind9:latest
+docker run -d --name bind9 -p 53:53 -p 53:53/udp -v /absolute/path/named.conf:/etc/bind/named.conf -v /absolute/path/exemple.com.db:/etc/bind/exemple.com.db mjkaye/bind9-alpine:latest
 ```
 **You can bind mount a directory or multiple files with the -v option.**
 
