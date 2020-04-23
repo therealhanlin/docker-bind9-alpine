@@ -8,7 +8,7 @@ docker run -d --name bind9 -p 53:53 -p 53:53/udp -v /absolute/path/named.conf:/e
 ```
 **You can bind mount a directory or multiple files with the -v option.**
 
-### Authoritative nameserver
+## Authoritative nameserver
 This is a small basic file named.conf if you want to run bind as an
 authoritative nameserver:
 ```
@@ -57,7 +57,7 @@ options {
 ```
 
 
-### Recursive DNS resolver
+## Recursive DNS resolver
 This is a small basic file named.conf if you want to run bind as a
 recursive DNS resolver:
 ```
