@@ -65,35 +65,10 @@ steps:
 
 ---
 kind: pipeline
-name: push_9.14.8-r5-manifest
+name: push-manifests
 
 steps:
-- name: manifest
-  image: plugins/manifest
-  settings:
-    username:
-      from_secret: docker_username
-    password:
-      from_secret: docker_password
-    target: mjkaye/bind9-alpine:9.14.8-r5
-    template: mjkaye/bind9-alpine:9.14.8-r5-ARCH
-    platforms:
-      - linux/amd64
-      - linux/arm
-      - linux/arm64
-
-depends_on:
-- amd64
-- arm64
-- arm
-
-
----
-kind: pipeline
-name: push_9.14-manifest
-
-steps:
-- name: manifest
+- name: manifest-9.14
   image: plugins/manifest
   settings:
     username:
@@ -106,17 +81,20 @@ steps:
       - linux/amd64
       - linux/arm
       - linux/arm64
-
-depends_on:
-- push_9.14.8-r5-manifest
-
-
----
-kind: pipeline
-name: push_latest_manifest
-
-steps:
-- name: manifest
+- name: manifest-9.14.8-r5
+  image: plugins/manifest
+  settings:
+    username:
+      from_secret: docker_username
+    password:
+      from_secret: docker_password
+    target: mjkaye/bind9-alpine:9.14.8-r5
+    template: mjkaye/bind9-alpine:9.14.8-r5-ARCH
+    platforms:
+      - linux/amd64
+      - linux/arm
+      - linux/arm64
+- name: manifest-latest
   image: plugins/manifest
   settings:
     username:
@@ -131,4 +109,6 @@ steps:
       - linux/arm64
 
 depends_on:
-- push_9.14-manifest
+- amd64
+- arm64
+- arm
