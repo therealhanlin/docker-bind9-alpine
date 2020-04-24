@@ -108,14 +108,12 @@ steps:
       - linux/arm64
 
 depends_on:
-- amd64
-- arm64
-- arm
+- push_9.14.8-r5-manifest
 
 
 ---
 kind: pipeline
-name: push_manifest
+name: push_latest_manifest
 
 steps:
 - name: manifest
@@ -133,6 +131,4 @@ steps:
       - linux/arm64
 
 depends_on:
-- amd64
-- arm64
-- arm
+- push_9.14-manifest
