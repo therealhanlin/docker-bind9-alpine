@@ -1,4 +1,4 @@
-FROM alpine:latest
+FROM alpine:3.11.6
 
 MAINTAINER Michael Kaye <mjkaye@cuttingfree.info>
 

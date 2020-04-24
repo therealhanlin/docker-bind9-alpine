@@ -14,7 +14,10 @@ steps:
     password:
       from_secret: docker_password
     repo: mjkaye/bind9-alpine
-    tags: latest-amd64
+    tags:
+      - latest-amd64
+      - 9.14.8-r5-amd64
+      - 9.14-amd64
 
 ---
 kind: pipeline
@@ -33,7 +36,10 @@ steps:
     password:
       from_secret: docker_password
     repo: mjkaye/bind9-alpine
-    tags: latest-arm
+    tags:
+      - latest-arm
+      - 9.14.8-r5-arm
+      - 9.14-arm
 
 ---
 kind: pipeline
@@ -52,7 +58,60 @@ steps:
     password:
       from_secret: docker_password
     repo: mjkaye/bind9-alpine
-    tags: latest-arm64
+    tags:
+      - latest-arm64
+      - 9.14.8-r5-arm64
+      - 9.14-arm64
+
+---
+kind: pipeline
+name: push_9.14.8-r5-manifest
+
+steps:
+- name: manifest
+  image: plugins/manifest
+  settings:
+    username:
+      from_secret: docker_username
+    password:
+      from_secret: docker_password
+    target: mjkaye/bind9-alpine:9.14.8-r5
+    template: mjkaye/bind9-alpine:9.14.8-r5-ARCH
+    platforms:
+      - linux/amd64
+      - linux/arm
+      - linux/arm64
+
+depends_on:
+- amd64
+- arm64
+- arm
+
+
+---
+kind: pipeline
+name: push_9.14-manifest
+
+steps:
+- name: manifest
+  image: plugins/manifest
+  settings:
+    username:
+      from_secret: docker_username
+    password:
+      from_secret: docker_password
+    target: mjkaye/bind9-alpine:9.14
+    template: mjkaye/bind9-alpine:9.14-ARCH
+    platforms:
+      - linux/amd64
+      - linux/arm
+      - linux/arm64
+
+depends_on:
+- amd64
+- arm64
+- arm
+
 
 ---
 kind: pipeline
