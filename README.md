@@ -4,7 +4,7 @@
 
 [![Docker pulls](https://img.shields.io/docker/pulls/mjkaye/bind9-alpine.svg?style=for-the-badge&logo=docker)](https://hub.docker.com/r/mjkaye/bind9-alpine)
 
-[![BIND version](https://img.shields.io/badge/Bind9%20version-9.14.8r5-blue.svg?style=for-the-badge)](https://www.isc.org/bind/)
+[![BIND version](https://img.shields.io/badge/BIND%20version-9.14.8--r5-blue.svg?style=for-the-badge)](https://www.isc.org/bind/)
 [![Alpine version](https://img.shields.io/badge/Alpine%20version-3.11.6-blue.svg?style=for-the-badge)](https://alpinelinux.org/)
 
 [![Github repository](https://img.shields.io/static/v1.svg?style=for-the-badge&color=blue&label=source%20code&message=docker-bind9-alpine&logo=github&logoColor=FFFFFF)](https://www.github.com/mjkaye/docker-bind9-alpine)
