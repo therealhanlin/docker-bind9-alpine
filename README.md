@@ -1,130 +1,81 @@
-# Bind9 Docker image running on Alpine Linux
+# BIND 9 Docker image running on Alpine Linux #
 
 [![Build Status](https://cloud.drone.io/api/badges/mjkaye/docker-bind9-alpine/status.svg)](https://cloud.drone.io/mjkaye/docker-bind9-alpine)
 
-## Command to use with this image:
-```
-docker run -d --name bind9 -p 53:53 -p 53:53/udp -v /absolute/path/named.conf:/etc/bind/named.conf -v /absolute/path/exemple.com.db:/etc/bind/exemple.com.db mjkaye/bind9-alpine:latest
-```
-**You can bind mount a directory or multiple files with the -v option.**
+[![Docker pulls](https://img.shields.io/docker/pulls/mjkaye/bind9-alpine.svg?style=for-the-badge&logo=docker)](https://hub.docker.com/r/mjkaye/bind9-alpine)
 
-## Authoritative nameserver
-This is a small basic file named.conf if you want to run bind as an
-authoritative nameserver:
-```
-options {
-        directory "/var/bind";
+[![BIND version](https://img.shields.io/badge/Bind9%20version-9.14.8r5-blue.svg?style=for-the-badge)](https://www.isc.org/bind/)
+[![Alpine version](https://img.shields.io/badge/Alpine%20version-3.11.6-blue.svg?style=for-the-badge)](https://alpinelinux.org/)
 
-        // Configure the IPs to listen on here.
-        listen-on { 127.0.0.1; };
-        listen-on-v6 { none; };
+[![Github repository](https://img.shields.io/static/v1.svg?style=for-the-badge&color=blue&label=source%20code&message=docker-bind9-alpine&logo=github&logoColor=FFFFFF)](https://www.github.com/mjkaye/docker-bind9-alpine)
 
-        // If you want to allow only specific hosts to use the DNS server:
-        //allow-query {
-        //      127.0.0.1;
-        //};
+## What is BIND? ##
 
-        // Specify a list of IPs/masks to allow zone transfers to here.
-        //
-        // You can override this on a per-zone basis by specifying this inside a zone
-        // block.
-        //
-        // Warning: Removing this block will cause BIND to revert to its default
-        //          behaviour of allowing zone transfers to any host (!).
-        allow-transfer {
-                none;
-        };
+BIND (also called "named") is the first, oldest, and most widely deployed DNS solution. It's the de facto standard on Unix-like operating systems. It is currently developed by the Internet Software Consortium.
 
-        // If you have problems and are behind a firewall:
-        //query-source address * port 53;
+## What is Alpine Linux? ##
 
-        pid-file "/var/run/named/named.pid";
+Alpine Linux is built around musl libc and busybox. This makes it smaller and more resource efficient, the base image only being 5MiB in size. It's a perfect fit for the Docker ecosystem.
 
-        // Changing this is NOT RECOMMENDED; see the notes above and in
-        // named.conf.recursive.
-        allow-recursion { none; };
-        recursion no;
-};
+## Supported architectures ##
 
-// Example of how to configure a zone for which this server is the master:
-//zone "example.com" IN {
-//      type master;
-//      file "/etc/bind/master/example.com";
-//};
+| Architecture  | Tag          |
+| ---           | ---          |
+| amd64/x86_64  | latest-amd64 |
+| arm32v7/armhf | latest-arm   |
+| aarch64/arm64 | latest-arm64 |
 
-// You can include files:
-//include "/etc/bind/example.conf";
+## How to use this image: ##
+
+```bash
+docker run -d \
+  --name bind9 \
+  -p 53:53 \
+  -p 53:53/udp \
+  -v /path/to/named.conf:/etc/bind/named.conf \
+  -v /path/to/example.com.zone:/var/bind/pri/example.com.zone \
+  mjkaye/bind9-alpine
 ```
 
+### Parameters ###
 
-## Recursive DNS resolver
-This is a small basic file named.conf if you want to run bind as a
-recursive DNS resolver:
-```
-options {
-        directory "/var/bind";
+Container images are configured using parameters passed at run-time (such as those above). These parameters are separated by a colon and indicate `<host>:<container>` respectively. For example, `-p 8053:53` would expose TCP port `53` from inside the container to be accessible from the host's IP on port `8053`. Similarly, when mapping volumes with the `-v` option, host paths to left of the colon are mapped to the container paths to the right of the colon.
 
-        // Specify a list of CIDR masks which should be allowed to issue recursive
-        // queries to the DNS server. Do NOT specify 0.0.0.0/0 here; see above.
-        allow-recursion {
-                127.0.0.1/32;
-        };
+| Parameter                            | Function                                                   |
+| ---                                  | ---                                                        |
+| `-p 53:53`                           | container's BIND will listen on host's TCP port 53         |
+| `-p 53:53/udp`                       | container's BIND will listen on host's UDP port 53         |
+| `-v :/etc/bind/named.conf`           | maps BIND configuration file to specified path on the host |
+| `-v :/var/bind/pri/example.com.zone` | maps zone file between container and host (optional)       |
 
-        // If you want this resolver to itself resolve via means of another recursive
-        // resolver, uncomment this block and specify the IP addresses of the desired
-        // upstream resolvers.
-        //forwarders {
-        //      123.123.123.123;
-        //      123.123.123.123;
-        //};
+### named.conf ###
 
-        // By default the resolver will attempt to perform recursive resolution itself
-        // if the forwarders are unavailable. If you want this resolver to fail outright
-        // if the upstream resolvers are unavailable, uncomment this directive.
-        //forward only;
+The following directives should be set in your named.conf.
 
-        // Configure the IPs to listen on here.
-        listen-on { 127.0.0.1; };
-        listen-on-v6 { none; };
+| Directive and value                    | Notes                            |
+| ---                                    | ---                              |
+| `directory "/var/bind";`               |                                  |
+| `pid-file "/var/run/named/named.pid";` |                                  |
+| `listen-on { 172.17/16; };`            | if you're running in normal mode |
+| `listen-on { 10/8; };`                 | if you're running in swarm mode  |
 
-        // If you have problems and are behind a firewall:
-        //query-source address * port 53;
+Zone files should be included in the normal manner.
 
-        pid-file "/var/run/named/named.pid";
+## Support ##
 
-        // Removing this block will cause BIND to revert to its default behaviour
-        // of allowing zone transfers to any host (!). There is no need to allow zone
-        // transfers when operating as a recursive resolver.
-        allow-transfer { none; };
-};
+ * [BIND 9 documentation](https://bind9.readthedocs.io/en/latest/index.html)
+ * [report BIND 9 bugs](https://gitlab.isc.org/isc-projects/bind9/issues)
+ * [report bugs related to this Docker image](https://github.com/mjkaye/docker-bind9-alpine/issues)
+ * [contribute to BIND](https://gitlab.isc.org/isc-projects/bind9/-/blob/master/CONTRIBUTING.md)
 
-// Briefly, a zone which has been declared delegation-only will be effectively
-// limited to containing NS RRs for subdomains, but no actual data beyond its
-// own apex (for example, its SOA RR and apex NS RRset). This can be used to
-// filter out "wildcard" or "synthesized" data from NAT boxes or from
-// authoritative name servers whose undelegated (in-zone) data is of no
-// interest.
-// See http://www.isc.org/products/BIND/delegation-only.html for more info
+## Donate ##
 
-//zone "COM" { type delegation-only; };
-//zone "NET" { type delegation-only; };
+|                                                                                                                                                                                                                                                               |                                                                                                 |
+| ---                                                                                                                                                                                                                                                           | ---                                                                                             |
+| [![Donate using Donorbox](https://img.shields.io/badge/usd,gbp,eur-265B79?logo=shopify&style=for-the-badge)](https://donorbox.org/docker-images)                                                                                                              |                                                                                                 |
+| [![Donate using Bitcoin](https://img.shields.io/badge/bitcoin-265B79?logo=bitcoin&style=for-the-badge)](https://www.freeformatter.com/qr-code?w=350&h=350&e=Q&c=bc1q2acfmcwrqc9pzttqgwn6nd0t5cncleue6ukfrs)                                                   | bc1q2acfmcwrqc9pzttqgwn6nd0t5cncleue6ukfrs                                                      |
+| [![Donate using Ethereum](https://img.shields.io/badge/ethereum-265B79?logo=ethereum&style=for-the-badge)](https://www.freeformatter.com/qr-code?w=350&h=350&e=Q&c=0x95ab6d374ef0d3a84bb7c767cdf6c77b3b170ba2)                                                | 0x95ab6d374ef0d3a84bb7c767cdf6c77b3b170ba2                                                      |
+| [![Donate using Dash](https://img.shields.io/badge/dash-265B79?logo=dash&style=for-the-badge)](https://www.freeformatter.com/qr-code?w=350&h=350&e=Q&c=XxVEjb1uYFnBGLm59eytUHBDWAYTHeyrET)                                                                    | XxVEjb1uYFnBGLm59eytUHBDWAYTHeyrET                                                              |
+| [![Donate using Monero](https://img.shields.io/badge/monero-265B79?logo=monero&style=for-the-badge)](https://www.freeformatter.com/qr-code?w=350&h=350&e=Q&c=46PNRCAb9oq244vALWaRX5GzWJHtkZEqKav3BJBFBSsrPbL44A5PwEa4RVkS5xMzRtT2MUjhX9QhibiFjjBbdADa5V3TXzJ) | 46PNRCAb9oq244vALWaRX5GzWJHtkZEqKav3BJBFBSsrPbL44A5PwEa4RVkS5xMzRtT2MUjhX9QhibiFjjBbdADa5V3TXzJ |
+| [![Donate using Groestlcoin](https://img.shields.io/badge/groestlcoin-265B79?&style=for-the-badge)](https://www.freeformatter.com/qr-code?w=350&h=350&e=Q&c=grs1q4gu2xfg8q448tlajg8grqkrlw9rjvuz29vctmj)                                                      | grs1q4gu2xfg8q448tlajg8grqkrlw9rjvuz29vctmj                                                     |
 
-zone "." IN {
-        type hint;
-        file "named.ca";
-};
-
-zone "localhost" IN {
-        type master;
-        file "pri/localhost.zone";
-        allow-update { none; };
-        notify no;
-};
-
-zone "127.in-addr.arpa" IN {
-        type master;
-        file "pri/127.zone";
-        allow-update { none; };
-        notify no;
-};
-```
