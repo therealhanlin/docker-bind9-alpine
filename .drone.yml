@@ -16,7 +16,7 @@ steps:
     repo: mjkaye/bind9-alpine
     tags:
       - latest-amd64
-      - 9.14.8-r5-amd64
+      - 9.14.12-r0-amd64
       - 9.14-amd64
 
 ---
@@ -38,7 +38,7 @@ steps:
     repo: mjkaye/bind9-alpine
     tags:
       - latest-arm
-      - 9.14.8-r5-arm
+      - 9.14.12-r0-arm
       - 9.14-arm
 
 ---
@@ -60,7 +60,7 @@ steps:
     repo: mjkaye/bind9-alpine
     tags:
       - latest-arm64
-      - 9.14.8-r5-arm64
+      - 9.14.12-r0-arm64
       - 9.14-arm64
 
 ---
@@ -81,15 +81,15 @@ steps:
       - linux/amd64
       - linux/arm
       - linux/arm64
-- name: manifest-9.14.8-r5
+- name: manifest-9.14.12-r0
   image: plugins/manifest
   settings:
     username:
       from_secret: docker_username
     password:
       from_secret: docker_password
-    target: mjkaye/bind9-alpine:9.14.8-r5
-    template: mjkaye/bind9-alpine:9.14.8-r5-ARCH
+    target: mjkaye/bind9-alpine:9.14.12-r0
+    template: mjkaye/bind9-alpine:9.14.12-r0-ARCH
     platforms:
       - linux/amd64
       - linux/arm

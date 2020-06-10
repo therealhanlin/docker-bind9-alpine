@@ -1,19 +1,23 @@
-# BIND 9 Docker image running on Alpine Linux #
+![mjkaye's logo](https://gistcdn.githack.com/mjkaye/1c98964af75456ccfca37c2a9a105825/raw/d1ac0b27dc154eb5f26026be55cab124adfde4d2/mjkaye-gradient.svg)
 
-[![Build Status](https://cloud.drone.io/api/badges/mjkaye/docker-bind9-alpine/status.svg)](https://cloud.drone.io/mjkaye/docker-bind9-alpine)
+# BIND 9 running on Alpine Linux #
 
-[![Docker pulls](https://img.shields.io/docker/pulls/mjkaye/bind9-alpine.svg?style=for-the-badge&logo=docker)](https://hub.docker.com/r/mjkaye/bind9-alpine)
+[![Build Status](https://img.shields.io/drone/build/mjkaye/docker-bind9-alpine.svg?style=for-the-badge&logo=drone)](https://cloud.drone.io/mjkaye/docker-bind9-alpine)
 
-[![BIND version](https://img.shields.io/badge/BIND%20version-9.14.8--r5-blue.svg?style=for-the-badge)](https://www.isc.org/bind/)
-[![Alpine version](https://img.shields.io/badge/Alpine%20version-3.11.6-blue.svg?style=for-the-badge)](https://alpinelinux.org/)
-
-[![Github repository](https://img.shields.io/static/v1.svg?style=for-the-badge&color=blue&label=source%20code&message=docker-bind9-alpine&logo=github&logoColor=FFFFFF)](https://www.github.com/mjkaye/docker-bind9-alpine)
+[![BIND version](https://img.shields.io/badge/BIND%20version-9.14.12--r0-blue.svg?style=for-the-badge&logoColor=FFFFFF&color=878a00)](https://www.isc.org/bind/)
+[![Alpine version](https://img.shields.io/badge/Alpine%20version-3.12.0-blue.svg?style=for-the-badge&logoColor=FFFFFF&color=878a00)](https://alpinelinux.org/)
+[![Github repository](https://img.shields.io/badge/source_code-docker--bind9--alpine-878a00.svg?style=for-the-badge&logo=github&logoColor=FFFFFF&color=878a00)](https://www.github.com/mjkaye/docker-bind9-alpine)
+[![Docker pulls](https://img.shields.io/docker/pulls/mjkaye/bind9-alpine.svg?style=for-the-badge&logo=docker&logoColor=FFFFFF&color=878a00)](https://hub.docker.com/r/mjkaye/bind9-alpine)
 
 ## What is BIND? ##
+
+[![BIND9 logo](https://i.ibb.co/k5M6BW0/Bind-9-ISC-Blue-small.png)](https://www.isc.org/bind/)
 
 BIND (also called "named") is the first, oldest, and most widely deployed DNS solution. It's the de facto standard on Unix-like operating systems. It is currently developed by the Internet Software Consortium.
 
 ## What is Alpine Linux? ##
+
+[![Alpine Linux logo](https://upload.wikimedia.org/wikipedia/commons/thumb/e/e6/Alpine_Linux.svg/320px-Alpine_Linux.svg.png)](https://alpinelinux.org/)
 
 Alpine Linux is built around musl libc and busybox. This makes it smaller and more resource efficient, the base image only being 5MiB in size. It's a perfect fit for the Docker ecosystem.
 
@@ -68,38 +72,59 @@ Zone files should be included in the normal manner.
  * [report bugs related to this Docker image](https://github.com/mjkaye/docker-bind9-alpine/issues)
  * [contribute to BIND](https://gitlab.isc.org/isc-projects/bind9/-/blob/master/CONTRIBUTING.md)
 
-## Donate ##
+## Changelog ##
 
-[![Donate using Donorbox](https://img.shields.io/badge/usd,gbp,eur-265B79?logo=shopify&style=for-the-badge)](https://donorbox.org/docker-images)
+* __9.14.12-r0:__ - Alpine release 3.12.0; bump BIND version to 9.14.12-r0.
+* __9.14.8-r5:__ - Alpine release 3.11.6; bump BIND version to 9.14.8-r5; support architectures arm32v7, aarch64, and amd64; use --no-cache with apk add.
+
+## Thank you ##
+
+Thank you for using bind9-alpine.
+
+Do you like this Docker image? Donations help me to devote more time to improving these images. My current focus is testing this in Swarm Mode and improving the documentation. Even the smallest donation is a big help.
+
+[![Donate using Donorbox](https://img.shields.io/badge/usd,_gbp,_eur-00578A?style=for-the-badge&logoColor=FFFFFF&labelColor=00578A&logo=cash%20app)](https://donorbox.org/docker-images)
 
 ---
 
-[![Donate using Bitcoin](https://img.shields.io/badge/bitcoin-265B79?logo=bitcoin&style=for-the-badge)](https://www.freeformatter.com/qr-code?w=350&h=350&e=Q&c=bc1q2acfmcwrqc9pzttqgwn6nd0t5cncleue6ukfrs)
+[![Donate using Bitcoin](https://img.shields.io/badge/bitcoin-00578A?style=for-the-badge&logoColor=FFFFFF&labelColor=00578A&logo=bitcoin)](https://www.freeformatter.com/qr-code?w=350&h=350&e=Q&c=bc1q2acfmcwrqc9pzttqgwn6nd0t5cncleue6ukfrs)
 
 bc1q2acfmcwrqc9pzttqgwn6nd0t5cncleue6ukfrs
 
 ---
 
-[![Donate using Ethereum](https://img.shields.io/badge/ethereum-265B79?logo=ethereum&style=for-the-badge)](https://www.freeformatter.com/qr-code?w=350&h=350&e=Q&c=0x95ab6d374ef0d3a84bb7c767cdf6c77b3b170ba2)
+[![Donate using Ethereum](https://img.shields.io/badge/ethereum-00578A?style=for-the-badge&logoColor=FFFFFF&labelColor=00578A&logo=ethereum)](https://www.freeformatter.com/qr-code?w=350&h=350&e=Q&c=0x95ab6d374ef0d3a84bb7c767cdf6c77b3b170ba2)
 
 0x95ab6d374ef0d3a84bb7c767cdf6c77b3b170ba2
 
 ---
 
-[![Donate using Dash](https://img.shields.io/badge/dash-265B79?logo=dash&style=for-the-badge)](https://www.freeformatter.com/qr-code?w=350&h=350&e=Q&c=XxVEjb1uYFnBGLm59eytUHBDWAYTHeyrET)
+[![Donate using Dash](https://img.shields.io/badge/dash-00578A?style=for-the-badge&logoColor=FFFFFF&labelColor=00578A&logo=dash)](https://www.freeformatter.com/qr-code?w=350&h=350&e=Q&c=XxVEjb1uYFnBGLm59eytUHBDWAYTHeyrET)
 
 XxVEjb1uYFnBGLm59eytUHBDWAYTHeyrET
 
 ---
 
-[![Donate using Monero](https://img.shields.io/badge/monero-265B79?logo=monero&style=for-the-badge)](https://www.freeformatter.com/qr-code?w=350&h=350&e=Q&c=49couTFdiXHhmodRY49DSt4uwLb5SK9d8QXoUQh6TmMgAmNhWVjtXzri1Qq2AWzTVxaYqbhbthXi1R7hKxM4cTvSFKrFcv1)
+[![Donate using Monero](https://img.shields.io/badge/monero-00578A?style=for-the-badge&logoColor=FFFFFF&labelColor=00578A&logo=monero)](https://www.freeformatter.com/qr-code?w=350&h=350&e=Q&c=49couTFdiXHhmodRY49DSt4uwLb5SK9d8QXoUQh6TmMgAmNhWVjtXzri1Qq2AWzTVxaYqbhbthXi1R7hKxM4cTvSFKrFcv1)
 
 49couTFdiXHhmodRY49DSt4uwLb5SK9d8QXoUQh6TmMgAmNhWVjtXzri1Qq2AWzTVxaYqbhbthXi1R7hKxM4cTvSFKrFcv1
 
 ---
 
-[![Donate using Groestlcoin](https://img.shields.io/badge/groestlcoin-265B79?&style=for-the-badge)](https://www.freeformatter.com/qr-code?w=350&h=350&e=Q&c=grs1q4gu2xfg8q448tlajg8grqkrlw9rjvuz29vctmj)
+[![Donate using Groestlcoin](https://img.shields.io/badge/groestlcoin-00578A?style=for-the-badge&logoColor=FFFFFF&labelColor=00578A)](https://www.freeformatter.com/qr-code?w=350&h=350&e=Q&c=grs1q4gu2xfg8q448tlajg8grqkrlw9rjvuz29vctmj)
 
 grs1q4gu2xfg8q448tlajg8grqkrlw9rjvuz29vctmj
+
+---
+
+[![Donate using NANO](https://img.shields.io/badge/NANO-00578A?style=for-the-badge&logoColor=FFFFFF&labelColor=00578A)](https://www.freeformatter.com/qr-code?w=350&h=350&e=Q&c=nano_1ro9tk49hje9f31r6x869z18rgbiertsc1jgw6siqb6c9cziywk1u4zq766z)
+
+nano_1ro9tk49hje9f31r6x869z18rgbiertsc1jgw6siqb6c9cziywk1u4zq766z
+
+---
+
+[![Donate using TRON](https://img.shields.io/badge/TRON-00578A?style=for-the-badge&logoColor=FFFFFF&labelColor=00578A)](https://www.freeformatter.com/qr-code?w=350&h=350&e=Q&c=TTna1P4yTLueZAunmxAu4p4qYZGQ28VTYE)
+
+TTna1P4yTLueZAunmxAu4p4qYZGQ28VTYE
 
 ---
