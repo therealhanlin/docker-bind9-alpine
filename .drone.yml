@@ -1,114 +1,114 @@
-kind: pipeline
-name: amd64
+# kind: pipeline
+# name: amd64
 
-platform:
-  os: linux
-  arch: amd64
+# platform:
+#   os: linux
+#   arch: amd64
 
-steps:
-- name: docker  
-  image: plugins/docker
-  settings:
-    username:
-      from_secret: docker_username
-    password:
-      from_secret: docker_password
-    repo: mjkaye/bind9-alpine
-    tags:
-      - latest-amd64
-      - 9.14.12-r0-amd64
-      - 9.14-amd64
+# steps:
+# - name: docker  
+#   image: plugins/docker
+#   settings:
+#     username:
+#       from_secret: docker_username
+#     password:
+#       from_secret: docker_password
+#     repo: mjkaye/bind9-alpine
+#     tags:
+#       - latest-amd64
+#       - 9.14.12-r0-amd64
+#       - 9.14-amd64
 
----
-kind: pipeline
-name: arm
+# ---
+# kind: pipeline
+# name: arm
 
-platform:
-  os: linux
-  arch: arm
+# platform:
+#   os: linux
+#   arch: arm
 
-steps:
-- name: docker  
-  image: plugins/docker
-  settings:
-    username:
-      from_secret: docker_username
-    password:
-      from_secret: docker_password
-    repo: mjkaye/bind9-alpine
-    tags:
-      - latest-arm
-      - 9.14.12-r0-arm
-      - 9.14-arm
+# steps:
+# - name: docker  
+#   image: plugins/docker
+#   settings:
+#     username:
+#       from_secret: docker_username
+#     password:
+#       from_secret: docker_password
+#     repo: mjkaye/bind9-alpine
+#     tags:
+#       - latest-arm
+#       - 9.14.12-r0-arm
+#       - 9.14-arm
 
----
-kind: pipeline
-name: arm64
+# ---
+# kind: pipeline
+# name: arm64
 
-platform:
-  os: linux
-  arch: arm64
+# platform:
+#   os: linux
+#   arch: arm64
 
-steps:
-- name: docker  
-  image: plugins/docker
-  settings:
-    username:
-      from_secret: docker_username
-    password:
-      from_secret: docker_password
-    repo: mjkaye/bind9-alpine
-    tags:
-      - latest-arm64
-      - 9.14.12-r0-arm64
-      - 9.14-arm64
+# steps:
+# - name: docker  
+#   image: plugins/docker
+#   settings:
+#     username:
+#       from_secret: docker_username
+#     password:
+#       from_secret: docker_password
+#     repo: mjkaye/bind9-alpine
+#     tags:
+#       - latest-arm64
+#       - 9.14.12-r0-arm64
+#       - 9.14-arm64
 
----
-kind: pipeline
-name: push-manifests
+# ---
+# kind: pipeline
+# name: push-manifests
 
-steps:
-- name: manifest-9.14
-  image: plugins/manifest
-  settings:
-    username:
-      from_secret: docker_username
-    password:
-      from_secret: docker_password
-    target: mjkaye/bind9-alpine:9.14
-    template: mjkaye/bind9-alpine:9.14-ARCH
-    platforms:
-      - linux/amd64
-      - linux/arm
-      - linux/arm64
-- name: manifest-9.14.12-r0
-  image: plugins/manifest
-  settings:
-    username:
-      from_secret: docker_username
-    password:
-      from_secret: docker_password
-    target: mjkaye/bind9-alpine:9.14.12-r0
-    template: mjkaye/bind9-alpine:9.14.12-r0-ARCH
-    platforms:
-      - linux/amd64
-      - linux/arm
-      - linux/arm64
-- name: manifest-latest
-  image: plugins/manifest
-  settings:
-    username:
-      from_secret: docker_username
-    password:
-      from_secret: docker_password
-    target: mjkaye/bind9-alpine:latest
-    template: mjkaye/bind9-alpine:latest-ARCH
-    platforms:
-      - linux/amd64
-      - linux/arm
-      - linux/arm64
+# steps:
+# - name: manifest-9.14
+#   image: plugins/manifest
+#   settings:
+#     username:
+#       from_secret: docker_username
+#     password:
+#       from_secret: docker_password
+#     target: mjkaye/bind9-alpine:9.14
+#     template: mjkaye/bind9-alpine:9.14-ARCH
+#     platforms:
+#       - linux/amd64
+#       - linux/arm
+#       - linux/arm64
+# - name: manifest-9.14.12-r0
+#   image: plugins/manifest
+#   settings:
+#     username:
+#       from_secret: docker_username
+#     password:
+#       from_secret: docker_password
+#     target: mjkaye/bind9-alpine:9.14.12-r0
+#     template: mjkaye/bind9-alpine:9.14.12-r0-ARCH
+#     platforms:
+#       - linux/amd64
+#       - linux/arm
+#       - linux/arm64
+# - name: manifest-latest
+#   image: plugins/manifest
+#   settings:
+#     username:
+#       from_secret: docker_username
+#     password:
+#       from_secret: docker_password
+#     target: mjkaye/bind9-alpine:latest
+#     template: mjkaye/bind9-alpine:latest-ARCH
+#     platforms:
+#       - linux/amd64
+#       - linux/arm
+#       - linux/arm64
 
-depends_on:
-- amd64
-- arm64
-- arm
+# depends_on:
+# - amd64
+# - arm64
+# - arm

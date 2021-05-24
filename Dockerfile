@@ -1,6 +1,6 @@
-FROM alpine:3.12.0
+FROM alpine:latest
 
-MAINTAINER Michael Kaye <mjkaye@cuttingfree.info>
+MAINTAINER Simple Patrick <public@simplepatrick.com>
 
 RUN apk add --no-cache bind
 
